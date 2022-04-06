@@ -3,70 +3,39 @@
     <head>
         <!--
         PICTURE ALBUM EXERCISE
-
         Starting from the current bootstrap layout, implement as many of the following features as you can:
-        
         First of all: 
+        Register on pexels to retrieve your API key: https://www.pexels.com/api/new/
+        the key, once acquired, needs to go into the headers of your HTTP request with a property of 
         
-        1. Register on pexels to retrieve your API key: https://www.pexels.com/api/new/ 
-        
-        2.The key, once acquired, needs to go into the headers of your HTTP request with a property of 
-        
-                {Authorization: "Bearer [YOUR API KEY]"}
+        {Authorization: "Bearer [YOUR API KEY]"}
         
         this should be enough for you to make your GET request successfully
-         
-        
-        EXERCISES:  
-        
-         1) When pressing on Load Images button, load the pictures from 
-        https://api.pexels.com/v1/search?query=[your-query]   2) When pressing on Load Seconday Images, load the pictures from 
-        https://api.pexels.com/v1/search?query=[your-secondary-query]
-        
+        1) When pressing on Load Images button, load the pictures from https://api.pexels.com/v1/search?query=[your-query]
+        2) When pressing on Load Seconday Images, load the pictures from https://api.pexels.com/v1/search?query=[your-secondary-query]
         3) The Edit button should be replaced with a "Hide" button. 
-        
         4) When the hide button is pressed, the whole picture card should disappear.
+        5) Replace the "9 mins" string in the card template with the ID of the Image
+        6) Add in the "jumbotron" a search field. Use the value of the search field to search new images and replace the existing ones.
         
-        5) Replace the "9 mins" string in the card template with the ID of the Image    6) Add in the "jumbotron" a search field. Use the value of the search field to search new images 
-        and replace the existing ones.
-        
-                
         
         [EXTRA]
-        
-                7) After every button is pressed, display an alert for 5 seconds the result of the operation (es.: 20 
-        images loaded)
-        
+        7) After every button is pressed, display an alert for 5 seconds the result of the operation (es.: 20 images loaded)
         8) Handle API errors gracefully, using alert components with the message inside
-        
         9) Add at the bottom of the page a carousel with "forest" images loaded by another API call
-        
         10) When the user clicks on the "VIEW" button inside the Card, open the specified image in a modal view
-        
-        
         [EVEN MORE EXTRA]
-        
-                11) Use the map method to create from your pexel's response object an array containing just the url strings    12) Use filter to modify the result of the api call to filter only images from some specific authors 
-        only ( you can choose which ones)
-        
-        
-        [HINTS]
-        
-                1.You can replace the images src for making your pictures appear on button click or you can use template literals to re-create all the cards from scratch.
-        
-        2.Use arrow functions to practice them
-        
-        
+        11) Use the map method to create from your pexel's response object an array containing just the url strings
+        12) Use filter to modify the result of the api call to filter only images from some specific authors only ( you can choose which ones)
+        // YOU CAN SKIP THIS 13) Use the reduce method on the results array to sum up all the id numbers in a single one
+        [HINT]
+        You can replace the images src for making your pictures appear on button click or you can use template literals to re-create all the cards from scratch.
+        Use arrow functions to practice them
         API Docs: 
-        
-              
-        Documentation for authenticating to the pexels APIs: 
-        https://www.pexels.com/api/documentation/?language=javascript#authorization
-        
-        Documentation for the search endpoint: 
-        https://www.pexels.com/api/documentation/?language=javascript#photos-search
-        -->
-
+      
+        Documentation for authenticating to the pexels APIs: https://www.pexels.com/api/documentation/?language=javascript#authorization
+        Documentation for the search endpoint: https://www.pexels.com/api/documentation/?language=javascript#photos-search
+      -->
         <meta charset="utf-8" />
         <meta
             name="viewport"
@@ -78,7 +47,7 @@
             content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
         />
         <meta name="generator" content="Jekyll v3.8.5" />
-        <title>Album example · TEAM</title>
+        <title>Picture Gallery</title>
 
         <link
             rel="canonical"
@@ -91,13 +60,14 @@
             integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
             crossorigin="anonymous"
         />
+        <link rel="stylesheet" href="style.css" />
 
         <style>
             .jumbotron {
                 padding-top: 3rem;
                 padding-bottom: 3rem;
                 margin-bottom: 0;
-                background-color: #fff;
+                background-color: rgb(201, 201, 201);
             }
             @media (min-width: 768px) {
                 .jumbotron {
@@ -140,6 +110,9 @@
                 .bd-placeholder-img-lg {
                     font-size: 3.5rem;
                 }
+            }
+            .placeholder {
+                color: rgba(249, 241, 241, 0.468);
             }
         </style>
     </head>
@@ -222,22 +195,19 @@
             <section class="jumbotron text-center">
                 <div class="container">
                     <h1 class="jumbotron-heading">Album API example</h1>
-                    <p class="lead text-muted">
-                        This page will dynamically load pictures from the web,
-                        and display them in a cool way!
-                    </p>
+                    <p class="lead text-muted">This is hwere the fun starts!</p>
                     <input
                         type="text"
                         class="form-control"
                         id="inputSearch"
                         onchange="searchIt(this.value)"
-                        placeholder="...search"
+                        placeholder="...Explore the world through a lense."
                     />
 
                     <p>
                         <a
                             href="#"
-                            class="btn btn-primary my-2"
+                            class="btn btn-dark my-2"
                             onclick="loadImgs()"
                             >Load Images</a
                         >
@@ -245,7 +215,7 @@
                             href="#"
                             class="btn btn-secondary my-2"
                             onclick="loadSecond()"
-                            >Load Secondary Images</a
+                            >Load Search</a
                         >
                     </p>
                 </div>
